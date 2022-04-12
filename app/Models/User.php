@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Comment;
 
 class User extends Authenticatable
 {
@@ -17,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'age', 'birthday', 'email', 'password', 'status', 'create_at',
     ];
 
     /**
@@ -37,4 +39,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany('App\Models\Post');
+    }
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+    public function profiles()
+    {
+        return $this->hasOne('App\Models\Profile');
+    }
 }

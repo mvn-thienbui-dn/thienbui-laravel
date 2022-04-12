@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Post;
+use App\Models\Profile;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(10)->create();
+        $this::call([
+            UserSeeder::class,
+            ProfileSeeder::class,
+            PostSeeder::class,
+            CommentSeeder::class
+        ]);
     }
 }

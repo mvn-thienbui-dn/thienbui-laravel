@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Models\Comment;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +18,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+    
 });
+//User
+Route::get('/admin/user/list',[\App\Http\Controllers\UserController::class,'index']);
+Route::get('/search',[\App\Http\Controllers\UserController::class,'search'])->name('search');
+Route::get('/sort/name',[\App\Http\Controllers\UserController::class,'sort_name'])->name('sort.name');
+Route::get('/sort/age',[\App\Http\Controllers\UserController::class,'sort_age'])->name('sort.age');
+Route::get('/admin/user/create',[\App\Http\Controllers\UserController::class,'create'])->name('create');
+Route::post('/create',[\App\Http\Controllers\UserController::class,'store'])->name('store');
+Route::get('/user/{id}/comment',[\App\Http\Controllers\UserController::class,'show_comment'])->name('comment.show');
+Route::get('/user/{id}/post',[\App\Http\Controllers\UserController::class,'show_post'])->name('post.show');
+Route::get('/users/{id}',[\App\Http\Controllers\UserController::class,'info_user'])->name('comment.info.user');
+
+//Comment
+Route::get('/admin/comment/list',[\App\Http\Controllers\CommentController::class,'index']);
+Route::get('/comments/{id}/users',[\App\Http\Controllers\CommentController::class,'show_user'])->name('user.show');
